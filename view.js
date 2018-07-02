@@ -107,11 +107,11 @@ function bootstrap() {
     [-34.475076, -58.521711],[-34.475223, -58.521889],
     [-34.475928, -58.521149],[-34.473961, -58.517296],
     [-34.469806, -58.520371],[-34.470416, -58.521494],
-    [-34.469701, -58.522017],[-34.469123, -58.520881],
-    [-34.469186, -58.520843],[-34.468418, -58.521404],
-    [-34.474024, -58.532862],[-34.472383, -58.537340],
-    [-34.465234, -58.522382]];
+    [-34.469701, -58.522017],[-34.469186, -58.520843],
+    [-34.468418, -58.521404],[-34.474024, -58.532862],
+    [-34.472383, -58.537340],[-34.465234, -58.522382]];
 
+// -----------------Forma automatica de arranque del recorrido---------------
 
     // var marker1 = L.Marker.movingMarker(corredor1,
     //     [3000, 9000, 9000, 4000], {autostart: true}).addTo(map);
@@ -122,17 +122,20 @@ function bootstrap() {
     // });
     
     
-    var marker2 = L.Marker.movingMarker(movil1,
-        [3000,3000,3000,3000,3000,3000,3000,3000,3000,
-        3000,3000,3000,3000,3000,3000,3000,3000,3000,
-        3000,3000,3000], {autostart: true}).addTo(map);
-    L.polyline(movil1, {color: 'blue'}).addTo(map);
-    marker2.on('end', function() {
-        marker2.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
-        .openPopup();
-    });
-    
-//     var marker1 = L.Marker.movingMarker(movil1, [10000]).addTo(map);
+    // var marker2 = L.Marker.movingMarker(movil1,
+    //     [3000,3000,3000,3000,5000,7000,9000,3000,3000,
+    //     3000,3000,3000,3000,3000,3000,3000,3000,3000,
+    //     3000,3000,3000], {autostart: true}).addTo(map);
+    // L.polyline(movil1, {color: 'blue'}).addTo(map);
+    // marker2.on('end', function() {
+    //     marker2.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
+    //     .openPopup();
+    // });
+// ------------Forma manual de arranque del recorrido---------------------
+
+//     var marker1 = L.Marker.movingMarker(movil1, [10000, 10000, 10000,
+//         20000, 2000, 6000, 4500, 4500, 2000, 2000, 4500, 4500, 4500,
+//          4500, 4500, 4500, 60000, 60000, 60000, 90000]).addTo(map);
 //     L.polyline(movil1).addTo(map);
 //     marker1.once('click', function () {
 //     marker1.start();
@@ -146,13 +149,26 @@ function bootstrap() {
 //         }
 //     });
 //     setTimeout(function() {
-//         marker1.bindPopup('<b> pausar </b>').openPopup();
-//     }, 2000);
+//         marker1.bindPopup('<b>Click Para pausar el recorrido! </b>').openPopup();
+//     }, 6000);
 //     });
-
-// marker1.bindPopup('<b>Empiezo el recorrido</b>', {closeOnClick: false});
+//     marker1.on('end', function() {
+//             marker1.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
+//             .openPopup();
+//         });
+// marker1.bindPopup('<b>Click para empezar el recorrido !</b>', {closeOnClick: false});
 // marker1.openPopup();
     
+// ######################---Recorrido infinito---#########################
+
+var marker1 = L.Marker.movingMarker(movil1,
+    [10000, 10000, 10000, 20000, 2000, 6000, 4500, 
+        4500, 2000, 2000, 4500, 4500, 4500,
+    4500, 4500, 4500, 4000, 30000, 10000, 60000], 
+    {autostart: true, loop: true}).addTo(map);
+    L.polyline(movil1).addTo(map);
+marker1.loops = 0;
+marker1.bindPopup('', {closeOnClick: false});
 
 
 
