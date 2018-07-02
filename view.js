@@ -113,63 +113,76 @@ function bootstrap() {
 
 // -----------------Forma automatica de arranque del recorrido---------------
 
-    // var marker1 = L.Marker.movingMarker(corredor1,
+    // var marker2 = L.Marker.movingMarker(corredor1,
     //     [3000, 9000, 9000, 4000], {autostart: true}).addTo(map);
     // L.polyline(corredor1, {color: 'blue'}).addTo(map);
-    // marker1.on('end', function() {
-    //     marker1.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
-    //     .openPopup();
-    // });
-    
-    
-    // var marker2 = L.Marker.movingMarker(movil1,
-    //     [3000,3000,3000,3000,5000,7000,9000,3000,3000,
-    //     3000,3000,3000,3000,3000,3000,3000,3000,3000,
-    //     3000,3000,3000], {autostart: true}).addTo(map);
-    // L.polyline(movil1, {color: 'blue'}).addTo(map);
     // marker2.on('end', function() {
     //     marker2.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
     //     .openPopup();
     // });
+    
+    
+    // var marker3 = L.Marker.movingMarker(movil1,
+    //     [3000,3000,3000,3000,5000,7000,9000,3000,3000,
+    //     3000,3000,3000,3000,3000,3000,3000,3000,3000,
+    //     3000,3000,3000], {autostart: true}).addTo(map);
+    // L.polyline(movil1, {color: 'blue'}).addTo(map);
+    // marker3.on('end', function() {
+    //     marker3.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
+    //     .openPopup();
+    // });
 // ------------Forma manual de arranque del recorrido---------------------
 
-//     var marker1 = L.Marker.movingMarker(movil1, [10000, 10000, 10000,
+//     var marker4 = L.Marker.movingMarker(movil1, [10000, 10000, 10000,
 //         20000, 2000, 6000, 4500, 4500, 2000, 2000, 4500, 4500, 4500,
 //          4500, 4500, 4500, 60000, 60000, 60000, 90000]).addTo(map);
-//     L.polyline(movil1).addTo(map);
-//     marker1.once('click', function () {
-//     marker1.start();
-//     marker1.closePopup();
-//     marker1.unbindPopup();
-//     marker1.on('click', function() {
-//         if (marker1.isRunning()) {
-//             marker1.pause();
+//     L.polyline(movil4).addTo(map);
+//     marker4.once('click', function () {
+//     marker4.start();
+//     marker4.closePopup();
+//     marker4.unbindPopup();
+//     marker4.on('click', function() {
+//         if (marker4.isRunning()) {
+//             marker4.pause();
 //         } else {
-//             marker1.start();
+//             marker4.start();
 //         }
 //     });
 //     setTimeout(function() {
-//         marker1.bindPopup('<b>Click Para pausar el recorrido! </b>').openPopup();
+//         marker4.bindPopup('<b>Click Para pausar el recorrido! </b>').openPopup();
 //     }, 6000);
 //     });
-//     marker1.on('end', function() {
-//             marker1.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
+//     marker4.on('end', function() {
+//             marker4.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
 //             .openPopup();
 //         });
-// marker1.bindPopup('<b>Click para empezar el recorrido !</b>', {closeOnClick: false});
-// marker1.openPopup();
+// marker4.bindPopup('<b>Click para empezar el recorrido !</b>', {closeOnClick: false});
+// marker4.openPopup();
     
 // ######################---Recorrido infinito---#########################
 
 var marker1 = L.Marker.movingMarker(movil1,
     [10000, 10000, 10000, 20000, 2000, 6000, 4500, 
         4500, 2000, 2000, 4500, 4500, 4500,
-    4500, 4500, 4500, 4000, 30000, 10000, 60000], 
+    4500, 4500, 4500, 4000, 50000, 10000, 60000], 
     {autostart: true, loop: true}).addTo(map);
     L.polyline(movil1).addTo(map);
 marker1.loops = 0;
 marker1.bindPopup('', {closeOnClick: false});
-
+marker1.on('end', function() {
+                marker1.bindPopup('<b>Finalize Recorrido!</b>', {closeOnClick: false})
+                .openPopup();
+            });
+    marker1.once('click', function () {
+    marker1.on('click', function() {
+        if (marker1.isRunning()) {
+            marker1.pause();
+            marker1.bindPopup('<b>Movil detenido </b>').openPopup();
+        } else if(marker1.isPaused()){
+            marker1.start();
+            marker1.bindPopup('<b>Movil avanzando </b>').openPopup();
+        }
+    });
 
 
 }
